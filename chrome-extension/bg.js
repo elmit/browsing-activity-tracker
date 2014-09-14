@@ -3,7 +3,7 @@ var prefs = {};
 chrome.storage.local.get({callback: 'http://localhost:8080', key: 'chrome'}, function(o) { prefs = o; });
 
 chrome.storage.onChanged.addListener(function(changes) {
-    for (key in changes) {
+    for (var key in changes) {
         prefs[key] = changes[key].newValue;
     }
 });
@@ -16,6 +16,7 @@ function log(url, title, favicon){
     });
     var xhr = new XMLHttpRequest();
     xhr.open("POST", prefs.callback);
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
 }
 

@@ -15,6 +15,7 @@ function log(url, title, favicon){
     });
     var xhr = new XMLHttpRequest();
     xhr.open("POST", prefs.callback);
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(data);
 }
 
@@ -26,7 +27,7 @@ function logTab(tab) {
     }
 }
 
-tabs.on("activate", function () { logTab(tabs.activeTab) });
+tabs.on("activate", function () { logTab(tabs.activeTab); });
 
 tabs.on("pageshow", logTab );
 
@@ -38,4 +39,4 @@ windows.on("activate", function (window) {
     logTab(tabs.activeTab) ;
 });
 
-windows.on("deactivate", function (window) { log(null, null, null) });
+windows.on("deactivate", function (window) { log(null, null, null); });
